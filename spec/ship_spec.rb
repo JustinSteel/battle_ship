@@ -1,4 +1,5 @@
 require './lib/ship'
+require 'pry'
 
 RSpec.describe Ship do
   describe '#Ship' do
@@ -12,6 +13,7 @@ RSpec.describe Ship do
 
     it 'ship starting details details' do
       expect(@cruiser.name).to eq("Cruiser")
+      
       expect(@cruiser.length).to eq(3)
       expect(@cruiser.health).to eq(3)
       expect(@cruiser.sunk?).to be false
@@ -23,10 +25,10 @@ RSpec.describe Ship do
 
       @cruiser.hit
       expect(@cruiser.health).to eq(1)
-      expect(@cruiser.sunt?).to be false
+      expect(@cruiser.sunk?).to be false
 
       @cruiser.hit
-      expect(@cruiser.sunt?).to be true
+      expect(@cruiser.sunk?).to be true
     end
   end
 end
