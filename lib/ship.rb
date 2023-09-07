@@ -6,12 +6,12 @@ class Ship
     @name = name
     @length = length
     @sunk = sunk
-    @health = health
+    @health = 0
     assign_health
   end
 
   def assign_health
-    @length = @health
+    @health = @length
   end
 
   def sunk?
