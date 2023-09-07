@@ -19,6 +19,7 @@ class Ship
       @sunk = true
     else
       @sunk = false
+    end
   end
 
   def hit
