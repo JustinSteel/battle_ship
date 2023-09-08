@@ -34,8 +34,10 @@ class Cell
      end
   end
 
-  def render
-    if @fired_upon == false
+  def render(ship = false)
+    if @fired_upon == false && ship == true
+      return "S"
+    elsif @fired_upon == false
       return "."
     elsif @fired_upon == true && empty? == true
       return "M"
