@@ -39,11 +39,12 @@ class Cell
       return "."
     elsif @fired_upon == true && empty? == true
       return "M"
-    elsif @fired_upon == true && empty? == false
-      return "H"
     elsif @fired_upon == true && empty? == false && @ship.health == 0
       return "X"
+    elsif @fired_upon == true && empty? == false
+      return "H"
     end
 
   end
+
 end
