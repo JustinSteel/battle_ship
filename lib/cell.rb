@@ -3,20 +3,21 @@ class Cell
   attr_accessor :ship
 
   def initialize(coordinate)
-    @ship       = false
+    @ship       = nil
     @fired_upon = false
+    @coordinate = coordinate
   end
 
   def empty?
-    if @ship == true
-      false
-    else
+    if @ship == nil
       true
+    else
+      false
     end
   end
 
   def place_ship(ship_type)
-    @ship = true
+    @ship = ship_type
   end
 
   def fired_upon?
@@ -25,10 +26,10 @@ class Cell
 
   def fire_upon
     @fired_upon = true
-     if @ship == true  
+     if empty? == false 
       ship.hit
      else
-      @ship == false
+      empty? == true
       return "Missed Me" 
      end
   end
