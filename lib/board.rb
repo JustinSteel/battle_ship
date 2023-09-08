@@ -25,4 +25,13 @@ class Board
   def valid_coordinate?(coordinate)
     @cells.include?(coordinate)
   end
+
+  def valid_placement?(ship, coordinates)
+    require 'pry'; binding.pry
+    if coordinates.length == ship.length && 
+      true
+    else
+      false
+    end
+  end
 end
