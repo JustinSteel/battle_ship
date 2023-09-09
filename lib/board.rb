@@ -18,7 +18,7 @@ class Board
       "D1" => Cell.new("D1"),
       "D2" => Cell.new("D2"),
       "D3" => Cell.new("D3"),
-      "D4" => Cell.new("D4"),
+      "D4" => Cell.new("D4")
     }
   end
 
@@ -27,11 +27,45 @@ class Board
   end
 
   def valid_placement?(ship, coordinates)
-    require 'pry'; binding.pry
-    if coordinates.length == ship.length && 
-      true
-    else
-      false
+    cords_array = coordinates.each_slice(1).to_a
+    cords_split = new.map do |n|
+    n[0].chars
+    end
+    if coordinates.length == 2 && (cords_split[0][0] == cords_split[0][1] || cords_split[1][0] == cords_split[1][1])
+    return true
+    elsif coordinates.length == 3 && (cords.split[0][0] == cords.split[0][1] == cords.split[0][2] || cords.split[1][0] == cords.split[1][1] == cords.split[1][2])
+    return true
     end
   end
 end
+
+#cant be same cell twice
+#cant be out of cell range
+#spaces have to be touching
+#spaces have to match ship length
+
+# def valid_placement?(ship, coordinates)
+#   return false if coordinates.length != ship.length || coordinates.uniq.length != ship.length
+#   return false if (coordinates.map {|coordinate| coordinate[0]}.all? {|coordinate| coordinate == coordinates[0][0]} && 
+#   coordinates.map{|coordinate| coordinate[1]}.all? {|coordinate| coordinate == coordinates[0][1]}).false?
+#   # todo consecutive
+#   return false if (coordinate.map {|coordinate| coordinate[0]}.all? {|coordinate| coordinate == [0][0]})
+#   #split coordinate
+
+#   #assign first half of coordinate to ordinal value
+#   #convert ordinal value to range
+#   #Each cons method
+#   true
+# end
+
+# cords_array = coordinates.each_slice(1).to_a
+# cords_split = new.map do |n|
+#   n[0].chars
+# end
+# if coordinates.length == 2 && (cords_split[0][0] == cords_split[0][1] ||
+#   cords_split[1][0] == cords_split[1][1])
+#   return true
+# elsif coordinates.length == 3 && (cords.split[0][0] == cords.split[0][1] == cords.split[0][2] ||
+#   cords.split[1][0] == cords.split[1][1] == cords.split[1][2])
+#   return true
+# end
