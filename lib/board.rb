@@ -34,8 +34,11 @@ class Board
     
     if ship.length == 2 && coordinates.length == 2 && ((cords_split[0][0] == cords_split[1][0]) && ([cords_split[0][1].ord, cords_split[1][1].ord].each_cons(2).any? { |ordinal1, ordinal2| ordinal2 == ordinal1 + 1 })) || (cords_split[0][1] == cords_split[1][1]) && ([cords_split[0][0].ord, cords_split[1][0].ord].each_cons(2).any? { |ordinal1, ordinal2| ordinal2 == ordinal1 + 1 })
       return true
-    elsif ship.length == 3 && coordinates.length == 3 && ((cords_split[0][0] == cords_split[1][0] && cords_split[1][0] == cords_split[2][0]) && ([cords_split[0][1].ord, cords_split[1][1].ord, cords_split[2][1].ord].each_cons(2).all? { |ordinal1, ordinal2| ordinal2 == ordinal1 + 1 })) || (cords_split[0][1] == cords_split[1][1] && cords_split[1][1] == cords_split[2][1]) && 
-    ([cords_split[0][0].ord, cords_split[1][0].ord, cords_split[2][0].ord].each_cons(2).all? { |ordinal1, ordinal2| ordinal2 == ordinal1 + 1 })
+    else
+      return false
+    end
+
+    if ship.length == 3 && coordinates.length == 3 && ((cords_split[0][0] == cords_split[1][0] && cords_split[1][0] == cords_split[2][0]) && ([cords_split[0][1].ord, cords_split[1][1].ord, cords_split[2][1].ord].each_cons(2).all? { |ordinal1, ordinal2| ordinal2 == ordinal1 + 1 })) || (cords_split[0][1] == cords_split[1][1] && cords_split[1][1] == cords_split[2][1]) && ([cords_split[0][0].ord, cords_split[1][0].ord, cords_split[2][0].ord].each_cons(2).all? { |ordinal1, ordinal2| ordinal2 == ordinal1 + 1 })
       return true
     else
       return false
