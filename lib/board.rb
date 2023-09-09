@@ -39,6 +39,11 @@ class Board
   end
 end
 
+#cant be same cell twice
+#cant be out of cell range
+#spaces have to be touching
+#spaces have to match ship length
+
 # def valid_placement?(ship, coordinates)
 #   return false if coordinates.length != ship.length || coordinates.uniq.length != ship.length
 #   return false if (coordinates.map {|coordinate| coordinate[0]}.all? {|coordinate| coordinate == coordinates[0][0]} && 
