@@ -31,9 +31,14 @@ class Board
     cords_split = cords_array.map do |n|
       n[0].chars
     end
-    if ship.length == 2 && coordinates.length == 2 && ((cords_split[0][0] == cords_split[1][0]) || (cords_split[0][1] == cords_split[1][1]))
+    # cords_row_cruiser = [cords_split[0][0], cords_split[1][0], cords_split[2][0]]
+    # cords_row_submarine = [cords_split[0][0], cords_split[1][0]]
+    # cords_column_cruiser = [cords_split[0][1], cords_split[1][1], cords_split[2][0]]
+    # cords_column_submarine = [cords_split[0][1], cords_split[1][1]]
+    
+    if ship.length == 2 && coordinates.length == 2 && (((cords_split[0][0] == cords_split[1][0]) && ([cords_split[0][0].ord, cords_split[1][0].ord].each_cons(2).any? { |ordinal1, ordinal2| ordinal2 == ordinal1 + 1 })) || ((cords_split[0][1] == cords_split[1][1])) && ([cords_split[0][1].ord, cords_split[1][1].ord].each_cons(2).any? { |ordinal1, ordinal2| ordinal2 == ordinal1 + 1 }))
       return true
-    elsif ship.length == 3 && coordinates.length == 3 && (cords_split[0][0] == cords_split[1][0] && cords_split[1][0] == cords_split[2][0]) || (cords_split[0][1] == cords_split[1][1] && cords_split[1][1] == cords_split[2][1])
+    elsif ship.length == 3 && coordinates.length == 3 && ((cords_split[0][0] == cords_split[1][0] && cords_split[1][0] == cords_split[2][0]) && ([cords_split[0][0].ord, cords_split[1][0].ord, cords_split[2][0].ord].each_cons(2).all? { |ordinal1, ordinal2| ordinal2 == ordinal1 + 1 })) || ((cords_split[0][1] == cords_split[1][1] && cords_split[1][1] == cords_split[2][1]) && ([cords_split[0][1].ord, cords_split[1][1].ord, cords_split[2][0].ord].each_cons(2).all? { |ordinal1, ordinal2| ordinal2 == ordinal1 + 1 }))
       return true
     else
       return false
@@ -41,10 +46,6 @@ class Board
   end
 end
 
-#cant be same cell twice
-#cant be out of cell range
-#spaces have to be touching
-#spaces have to match ship length
 
 # def valid_placement?(ship, coordinates)
 #   return false if coordinates.length != ship.length || coordinates.uniq.length != ship.length
