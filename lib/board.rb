@@ -28,13 +28,15 @@ class Board
 
   def valid_placement?(ship, coordinates)
     cords_array = coordinates.each_slice(1).to_a
-    cords_split = new.map do |n|
+    cords_split = cords_array.map do |n|
     n[0].chars
     end
     if coordinates.length == 2 && (cords_split[0][0] == cords_split[0][1] || cords_split[1][0] == cords_split[1][1])
-    return true
-    elsif coordinates.length == 3 && (cords.split[0][0] == cords.split[0][1] == cords.split[0][2] || cords.split[1][0] == cords.split[1][1] == cords.split[1][2])
-    return true
+      return true
+    elsif coordinates.length == 3 && (cords_split[0][0] == cords_split[0][1] && cords_split[0][1] == cords_split[0][2] || cords_split[1][0] == cords_split[1][1] && cords_split[1][1] == cords_split[1][2])
+      return true
+    else
+      return false
     end
   end
 end
