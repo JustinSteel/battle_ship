@@ -41,6 +41,10 @@ class Board
     (numbers.uniq.length == 1 && ("A"..letters.last).each_cons(cords.count).any? { |each| letters == each}) &&
     cords.all? {|cell| @cells[cell].empty?}
   end
+
+  def place(ship, cords)
+    if valid_placement?
+  end
 end
 
 
