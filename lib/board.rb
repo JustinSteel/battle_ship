@@ -27,32 +27,22 @@ class Board
   end
 
   def valid_placement?(ship, coordinates)
-    cords_subarray = coordinates.each_slice(1).to_a
-    cords_split = cords_subarray.map do |n|
-      n[0].chars
-    end
-    
-    if ship.length == coordinates.length
-      if ship.length == 2 && coordinates.length == 2 
-        if ((cords_split[0][0] == cords_split[1][0]) && ([cords_split[0][1].ord, cords_split[1][1].ord].each_cons(2).any? { |ordinal1, ordinal2| ordinal2 == ordinal1 + 1 })) || (cords_split[0][1] == cords_split[1][1]) && ([cords_split[0][0].ord, cords_split[1][0].ord].each_cons(2).any? { |ordinal1, ordinal2| ordinal2 == ordinal1 + 1 })
-          return true
-        elsif !((cords_split[0][0] == cords_split[1][0]) && ([cords_split[0][1].ord, cords_split[1][1].ord].each_cons(2).any? { |ordinal1, ordinal2| ordinal2 == ordinal1 + 1 })) || (cords_split[0][1] == cords_split[1][1]) && ([cords_split[0][0].ord, cords_split[1][0].ord].each_cons(2).any? { |ordinal1, ordinal2| ordinal2 == ordinal1 + 1 })
-          return false
-        end
-      else
-      end
 
-      if ship.length == 3 && coordinates.length == 3 
-        if ((cords_split[0][0] == cords_split[1][0] && cords_split[1][0] == cords_split[2][0]) && ([cords_split[0][1].ord, cords_split[1][1].ord, cords_split[2][1].ord].each_cons(2).all? { |ordinal1, ordinal2| ordinal2 == ordinal1 + 1 })) || (cords_split[0][1] == cords_split[1][1] && cords_split[1][1] == cords_split[2][1]) && ([cords_split[0][0].ord, cords_split[1][0].ord, cords_split[2][0].ord].each_cons(2).all? { |ordinal1, ordinal2| ordinal2 == ordinal1 + 1 })
-          return true
-        elsif !((cords_split[0][0] == cords_split[1][0] && cords_split[1][0] == cords_split[2][0]) && ([cords_split[0][1].ord, cords_split[1][1].ord, cords_split[2][1].ord].each_cons(2).all? { |ordinal1, ordinal2| ordinal2 == ordinal1 + 1 })) || (cords_split[0][1] == cords_split[1][1] && cords_split[1][1] == cords_split[2][1]) && ([cords_split[0][0].ord, cords_split[1][0].ord, cords_split[2][0].ord].each_cons(2).all? { |ordinal1, ordinal2| ordinal2 == ordinal1 + 1 })
-          return false
-        end
-      else
-      end
+    if ship.length == coordinates.length
+       helper_method(coordinates)
     else
-      return false
+      false
     end
   end
+
+  def helper_method(cords)
+    letters = cords.map {|cord| cord[0]}
+    numbers = cords.map {|cord| cord[1..-1].to_i}
+    (letters.uniq.length == 1 && numbers == (numbers.first..numbers.last).to_a) ||
+    (numbers.uniq.length == 1 && ("A"..letters.last).each_cons(cords.count).any? { |each| letters == each}) &&
+    cords.all? {|cell| @cells[cell].empty?}
+  end
 end
+
+
 
