@@ -73,6 +73,32 @@ RSpec.describe Board do
       expect(cell_3.ship == cell_2.ship).to be true
     end
 
+    it 'will not overlap ships' diagonal
+      @board.place(@cruiser, ["A1", "A2", "A3"])
+      @submarine = Ship.new("Submarine", 2) 
+
+      expect(@board.valid_placement?(@submarine, ["A1", "B1"])).to be false
+    end
+
   end
+
+  describe '#render' do
+    before(:each) do
+      @board = Board.new
+      @cruiser = Ship.new("Cruiser", 3)
+      @board.place(@cruiser, ["A1", "A2", "A3"])
+    end
+
+    it 'renders board' do
+      expect(@board.render).to eq("  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n")
+    end
+
+    it 'renders board with ships unhidden' do
+      expect(@board.render(true)).to eq("  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n")
+    end
+
+
+  end
+
 
 end
