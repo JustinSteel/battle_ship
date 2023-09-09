@@ -37,7 +37,6 @@ RSpec.describe Board do
     it 'checks if coordinates are consecutive' do
       # require 'pry'; binding.pry
       expect(@board.valid_placement?(@cruiser, ["A1", "A2", "A4"])).to be false
-      #require 'pry'; binding.pry
       expect(@board.valid_placement?(@submarine, ["A1", "C1"])).to be false
       expect(@board.valid_placement?(@cruiser, ["A3", "A2", "A1"])).to be false
       expect(@board.valid_placement?(@submarine, ["C1", "B1"])).to be false
@@ -49,7 +48,6 @@ RSpec.describe Board do
     end
 
     it 'checks that valid placement returns true' do
-      #require 'pry'; binding.pry
       expect(@board.valid_placement?(@submarine, ["A1", "A2"])).to be true
       expect(@board.valid_placement?(@cruiser, ["B1", "C1", "D1"])).to be true
     end

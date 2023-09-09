@@ -27,7 +27,6 @@ class Board
   end
 
   def valid_placement?(ship, coordinates)
-
     if ship.length == coordinates.length
        helper_method(coordinates)
     else
@@ -47,6 +46,5 @@ class Board
     if valid_placement?
   end
 end
-
 
 
