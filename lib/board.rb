@@ -22,6 +22,10 @@ class Board
     }
   end
 
+  def create_board(ship = false)
+    
+  end
+
   def valid_coordinate?(coordinate)
     @cells.include?(coordinate)
   end
