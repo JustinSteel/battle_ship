@@ -43,9 +43,10 @@ class Board
   end
 
   def place(ship, cords)
-    if valid_placement?(ship, cords) == true
-      cords.map {|cord| @cells[cord] = ship}
-        require 'pry'; binding.pry
+    if valid_placement?(ship, cords) == true      
+      cords.map do |cord|
+        @cells[cord].place_ship(ship)
+       end
     end
   end
 end
