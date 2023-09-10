@@ -55,13 +55,15 @@ RSpec.describe Board do
     end
   end
 
-  xdescribe '#place' do 
+  describe '#place' do 
     before(:each) do
       @board = Board.new
       @cruiser = Ship.new("Cruiser", 3)
     end
 
     it 'places ship' do 
+      #require 'pry'; binding.pry
+      
       @board.place(@cruiser, ["A1", "A2", "A3"]) 
       cell_1 = @board.cells["A1"] 
       cell_2 = @board.cells["A2"]
@@ -81,7 +83,7 @@ RSpec.describe Board do
     end
   end
 
-  xdescribe '#render' do
+  describe '#render' do
     before(:each) do
       @board = Board.new
       @cruiser = Ship.new("Cruiser", 3)
