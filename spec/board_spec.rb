@@ -91,10 +91,12 @@ RSpec.describe Board do
     end
 
     it 'renders board' do
+      #require 'pry'; binding.pry
       expect(@board.render).to eq("  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n")
     end
 
     it 'renders board with ships unhidden' do
+      #require 'pry'; binding.pry
       expect(@board.render(true)).to eq("  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n")
     end
   end
