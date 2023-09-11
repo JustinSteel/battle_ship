@@ -57,6 +57,7 @@ RSpec.describe Board do
     before(:each) do
       @board = Board.new
       @cruiser = Ship.new("Cruiser", 3)
+      require 'pry'; binding.pry
     end
 
     it 'places ship' do 
@@ -105,6 +106,26 @@ RSpec.describe Board do
       "B . . . . \n" +
       "C . . . . \n" +
       "D . . . . \n"
+      )
+    end
+
+    it 'sinks a ship' do
+      cell_1 = @board.cells["A1"] 
+      cell_2 = @board.cells["A2"]
+      cell_3 = @board.cells["A3"]
+      cell_4 = @board.cells["D4"]
+
+      cell_1.fire_upon
+      cell_2.fire_upon
+      cell_3.fire_upon
+      cell_4.fire_upon
+
+      expect(@board.render).to eq(
+      "  1 2 3 4 \n" +
+      "A X X X . \n" +
+      "B . . . . \n" +
+      "C . . . . \n" +
+      "D . . . M \n"  
       )
     end
   end
