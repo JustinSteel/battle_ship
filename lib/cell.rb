@@ -28,14 +28,14 @@ class Cell
     @fired_upon = true
      if empty? == false 
       ship.hit
-     else
-      empty? == true
-      return "Missed Me" 
+    #  else
+    #   empty? == true
+      # return "M" 
      end
   end
 
   def render(ship = false)
-    if @fired_upon == false && ship == true
+    if @fired_upon == false && ship == true && empty? == false
       return "S"
     elsif @fired_upon == false
       return "."
