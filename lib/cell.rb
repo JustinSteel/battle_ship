@@ -46,7 +46,5 @@ class Cell
     elsif @fired_upon == true && empty? == false
       return "H"
     end
-
   end
-
 end

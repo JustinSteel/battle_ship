@@ -78,7 +78,7 @@ RSpec.describe Board do
     end
   end
 
-  describe '#Creat Board' do
+  describe '#Render' do
     before(:each) do
       @board = Board.new
       @cruiser = Ship.new("Cruiser", 3)
@@ -86,7 +86,7 @@ RSpec.describe Board do
     end
 
     it 'renders board' do
-      expect(@board.create_board).to eq(
+      expect(@board.render).to eq(
         "  1 2 3 4 \n" +
         "A . . . . \n" +
         "B . . . . \n" +
@@ -96,7 +96,7 @@ RSpec.describe Board do
     end
 
     it 'renders board with ships unhidden' do
-      expect(@board.create_board(true)).to eq(
+      expect(@board.render(true)).to eq(
         "  1 2 3 4 \n" +
         "A S S S . \n" +
         "B . . . . \n" +

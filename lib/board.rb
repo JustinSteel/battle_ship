@@ -22,8 +22,8 @@ class Board
     }
   end
 
-  def create_board(ship = false)
-    
+  def render(ship = false)
+    require 'pry'; binding.pry
   end
 
   def valid_coordinate?(coordinate)
