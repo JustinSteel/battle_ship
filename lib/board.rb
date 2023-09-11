@@ -22,12 +22,15 @@ class Board
     }
   end
 
+  def render(ship = false)
+    require 'pry'; binding.pry
+  end
+
   def valid_coordinate?(coordinate)
     @cells.include?(coordinate)
   end
 
   def valid_placement?(ship, coordinates)
-
     if ship.length == coordinates.length
        helper_method(coordinates)
     else
@@ -53,12 +56,27 @@ class Board
 
   def render(ship = false)
     r = @cells.values.map do |cell|
+      
       cell.render(ship)
     end
-    
-    "  1 2 3 4 \nA " + r[0] + " " + r[1] + " " + r[2] + " " + r[3] + " " + "\nB " + r[4] + " " + r[5] + " " + r[6] + " " + r[7] + " \nC " + r[8] + " " + r[9] + " " + r[10] + " " + r[11] + " \nD " + r[12] + " " + r[13] + " " + r[14] + " " + r[15] + " \n"
+    "  1 2 3 4 \nA " + 
+    r[0] + " " + 
+    r[1] + " " + 
+    r[2] + " " + 
+    r[3] + " " + "\nB " + 
+    r[4] + " " + 
+    r[5] + " " + 
+    r[6] + " " + 
+    r[7] + " \nC " + 
+    r[8] + " " + 
+    r[9] + " " + 
+    r[10] + " " + 
+    r[11] + " \nD " + 
+    r[12] + " " + 
+    r[13] + " " + 
+    r[14] + " " + 
+    r[15] + " \n"
   end
 end
-
 
 

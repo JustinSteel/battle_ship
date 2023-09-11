@@ -1,5 +1,6 @@
 require './lib/board'
 require './lib/ship'
+require './lib/cell'
 
 RSpec.describe Board do
   describe '#board' do
@@ -35,9 +36,7 @@ RSpec.describe Board do
     end
 
     it 'checks if coordinates are consecutive' do
-      # require 'pry'; binding.pry
       expect(@board.valid_placement?(@cruiser, ["A1", "A2", "A4"])).to be false
-      #require 'pry'; binding.pry
       expect(@board.valid_placement?(@submarine, ["A1", "C1"])).to be false
       expect(@board.valid_placement?(@cruiser, ["A3", "A2", "A1"])).to be false
       expect(@board.valid_placement?(@submarine, ["C1", "B1"])).to be false
@@ -49,7 +48,6 @@ RSpec.describe Board do
     end
 
     it 'checks that valid placement returns true' do
-      #require 'pry'; binding.pry
       expect(@board.valid_placement?(@submarine, ["A1", "A2"])).to be true
       expect(@board.valid_placement?(@cruiser, ["B1", "C1", "D1"])).to be true
     end
@@ -62,8 +60,6 @@ RSpec.describe Board do
     end
 
     it 'places ship' do 
-      #require 'pry'; binding.pry
-      
       @board.place(@cruiser, ["A1", "A2", "A3"]) 
       cell_1 = @board.cells["A1"] 
       cell_2 = @board.cells["A2"]
@@ -83,7 +79,7 @@ RSpec.describe Board do
     end
   end
 
-  describe '#render' do
+  describe '#Render' do
     before(:each) do
       @board = Board.new
       @cruiser = Ship.new("Cruiser", 3)
@@ -92,12 +88,24 @@ RSpec.describe Board do
 
     it 'renders board' do
       #require 'pry'; binding.pry
-      expect(@board.render).to eq("  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n")
+      expect(@board.render).to eq(
+      "  1 2 3 4 \n" +
+      "A . . . . \n" +
+      "B . . . . \n" +
+      "C . . . . \n" +
+      "D . . . . \n"  
+      )
     end
 
     it 'renders board with ships unhidden' do
       #require 'pry'; binding.pry
-      expect(@board.render(true)).to eq("  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n")
+      expect(@board.render(true)).to eq(
+      "  1 2 3 4 \n" +
+      "A S S S . \n" +
+      "B . . . . \n" +
+      "C . . . . \n" +
+      "D . . . . \n"
+      )
     end
   end
 end
