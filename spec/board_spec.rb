@@ -87,12 +87,24 @@ RSpec.describe Board do
 
     it 'renders board' do
       #require 'pry'; binding.pry
-      expect(@board.render).to eq("  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n")
+      expect(@board.render).to eq(
+      "  1 2 3 4 \n" +
+      "A . . . . \n" +
+      "B . . . . \n" +
+      "C . . . . \n" +
+      "D . . . . \n"  
+      )
     end
 
     it 'renders board with ships unhidden' do
       #require 'pry'; binding.pry
-      expect(@board.render(true)).to eq("  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n")
+      expect(@board.render(true)).to eq(
+      "  1 2 3 4 \n" +
+      "A S S S . \n" +
+      "B . . . . \n" +
+      "C . . . . \n" +
+      "D . . . . \n"
+      )
     end
   end
 end
