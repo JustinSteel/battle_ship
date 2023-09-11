@@ -57,6 +57,7 @@ RSpec.describe Board do
     before(:each) do
       @board = Board.new
       @cruiser = Ship.new("Cruiser", 3)
+      require 'pry'; binding.pry
     end
 
     it 'places ship' do 
