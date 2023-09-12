@@ -32,11 +32,13 @@ def start
     #computer place ships
     computer_place_ships(submarine)
     computer_place_ships(cruiser)
-    
+    puts "=============COMPUTER BOARD=============\n"
+    print @computer_board.render(true) 
     puts "\n I have laid out my ships on the grid.
-    You now need to lay out your two ships.
-    The Cruiser is three units long and the Submarine is two units long. \n\n"
+You now need to lay out your two ships.
+The Cruiser is three units long and the Submarine is two units long. \n\n"
     #computer has placed ships, asks for player's input.
+    puts "==============PLAYER BOARD==============\n"
       print @player_board.render
         
       puts "Enter the squares for the Cruiser (3 spaces): example: A1 A2 A3"
@@ -68,8 +70,8 @@ def start
         @player_board.place(submarine, cords)
         print @player_board.render(true)
         
-      end
-          
+        turn       
+  end
 end
 
 def computer_place_ships(ship)
@@ -98,10 +100,8 @@ def computer_place_ships(ship)
     end
     #  require 'pry'; binding.pry
   end
-  print @computer_board.render(true)
 end
 
-start
 
 #loop
 #render computer board
@@ -111,15 +111,33 @@ start
 #computer takes a shot
 #updates on player board
 #renders player board
-until @player_board.cruiser.sunk = true && @player_board.submarine.sunk = true ||
-  @computer_board.cruiser.sunk = true && @computer_board.submarine.sunk = true
-  fired_upon_cell = @player_board.cells.to_a.sample
-  puts "My turn. I fire upon #{fired_upon_cell}"
-  puts "choose a cell to fire upon:\n"
-  print @computer_board.render(true)
-
-  input = gets.chomp
-
-
-
+def turn
+  #require 'pry'; binding.pry
+  # until @player_board.cruiser.sunk = true && @player_board.submarine.sunk = true ||
+  #   @computer_board.cruiser.sunk = true && @computer_board.submarine.sunk = true
+    
+    #need to call sunk differently
+    fired_upon_cell = @player_board.cells.to_a.sample
+    puts "My turn. I fire upon #{fired_upon_cell.first}"
+    fired_upon_cell.last.fire_upon
+    print @player_board.render(true)
+    
+    puts "Enter the coordinate for your shot:\n"
+    print @computer_board.render(true)
+    coordinate = nil
+    until @computer_board.valid_coordinate?(coordinate)
+      ans = gets.chomp
+      coordinate = ans.upcase
+      if @computer_board.valid_coordinate?(coordinate) == false
+        p  "Invalid coordinate, try again."     
+      end
+      #require 'pry'; binding.pry
+      @computer_board.cells[coordinate].fire_upon
+      print @computer_board.render(true)
+    end
+    
+  
 end
+
+#display results of hits and misses every turn
+start
