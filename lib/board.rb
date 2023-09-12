@@ -39,11 +39,15 @@ class Board
   end
 
   def helper_method(cords)
-    letters = cords.map {|cord| cord[0]}
-    numbers = cords.map {|cord| cord[1..-1].to_i}
-    (letters.uniq.length == 1 && numbers == (numbers.first..numbers.last).to_a) ||
-    (numbers.uniq.length == 1 && ("A"..letters.last).each_cons(cords.count).any? { |each| letters == each}) &&
-    cords.all? {|cell| @cells[cell].empty?}
+    if cords.all? {|cord| valid_coordinate?(cord)}
+      letters = cords.map {|cord| cord[0]}
+      numbers = cords.map {|cord| cord[1..-1].to_i}
+      (letters.uniq.length == 1 && numbers == (numbers.first..numbers.last).to_a) ||
+      (numbers.uniq.length == 1 && ("A"..letters.last).each_cons(cords.count).any? { |each| letters == each}) &&
+      cords.all? {|cell| @cells[cell].empty?}
+    else 
+      false
+    end
   end
 
   def place(ship, cords)
@@ -51,6 +55,8 @@ class Board
       cords.map do |cord|
         @cells[cord].place_ship(ship)
        end
+    else
+      false
     end
   end
 
