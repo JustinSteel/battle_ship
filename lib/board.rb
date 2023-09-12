@@ -42,7 +42,7 @@ class Board
     if cords.all? {|cord| valid_coordinate?(cord)}
       letters = cords.map {|cord| cord[0]}
       numbers = cords.map {|cord| cord[1..-1].to_i}
-      (letters.uniq.length == 1 && numbers == (numbers.first..numbers.last).to_a) ||
+      (letters.uniq.length == 1 && numbers == (numbers.first..numbers.last).to_a) && cords.all? {|cell| @cells[cell].empty?}||
       (numbers.uniq.length == 1 && ("A"..letters.last).each_cons(cords.count).any? { |each| letters == each}) &&
       cords.all? {|cell| @cells[cell].empty?}
     else 
