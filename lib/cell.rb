@@ -30,7 +30,7 @@ class Cell
       ship.hit
     #  else
     #   empty? == true
-      # return "M" 
+    #   return "M" 
      end
   end
 
