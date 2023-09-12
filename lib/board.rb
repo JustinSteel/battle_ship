@@ -51,6 +51,8 @@ class Board
       cords.map do |cord|
         @cells[cord].place_ship(ship)
        end
+    elsif valid_placement?(ship, cords) == false
+      "invalid coordinates"
     end
   end
 
