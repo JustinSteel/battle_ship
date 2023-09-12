@@ -90,6 +90,6 @@ def computer_place_ships(ship)
     end
     #  require 'pry'; binding.pry
   end
-  p @board.render(true)
+  print @board.render(true)
 end
 start

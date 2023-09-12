@@ -23,7 +23,7 @@ class Board
   end
 
   def render(ship = false)
-    require 'pry'; binding.pry
+    
   end
 
   def valid_coordinate?(coordinate)
@@ -84,5 +84,4 @@ class Board
     r[15] + " \n"
   end
 end
-
 
