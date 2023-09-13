@@ -10,8 +10,7 @@ RSpec.describe Board do
 
     it 'creates cells when board is made' do
       expect(@board.cells).is_a?(Hash)
-      expect(@board.cells.keys.count).to eq(16)
-      # expect(@board.cells.values).to be_a(Cell)      
+      expect(@board.cells.keys.count).to eq(16)      
     end
 
     it 'validates coordinates' do
@@ -110,12 +109,10 @@ RSpec.describe Board do
       cell_2 = @board.cells["A2"]
       cell_3 = @board.cells["A3"]
       cell_4 = @board.cells["D4"]
-
       cell_1.fire_upon
       cell_2.fire_upon
       cell_3.fire_upon
       cell_4.fire_upon
-
       expect(@board.render).to eq(
       "  1 2 3 4 \n" +
       "A X X X . \n" +
