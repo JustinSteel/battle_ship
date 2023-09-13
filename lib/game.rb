@@ -3,7 +3,6 @@ require './lib/ship'
 require './lib/cell'
 
 class Game
-  attr_reader :player_board, :computer_board
 
   def initialize
     @player_board = Board.new
@@ -32,9 +31,7 @@ class Game
     computer_place_ships(@com_cruiser)
     puts "=============COMPUTER BOARD=============\n"
     print @computer_board.render(true) 
-    puts "\n I have laid out my ships on the grid.
-    You now need to lay out your two ships.
-    The Cruiser is three units long and the Submarine is two units long. \n\n"
+    puts "\nI have laid out my ships on the grid.\nYou now need to lay out your two ships.\nThe Cruiser is three units long and the Submarine is two units long. \n\n"
       #computer has placed ships, asks for player's input.
     puts "==============PLAYER BOARD==============\n"
     print @player_board.render
@@ -98,8 +95,7 @@ class Game
     end
     @player_board.place(@p_submarine, cords)
     puts "==============PLAYER BOARD==============\n"
-    print @player_board.render(true)
-          
+    print @player_board.render(true)          
     turn       
   end
   
@@ -128,46 +124,47 @@ class Game
   end
 
   def turn
-  
     until @p_cruiser.sunk? == true && @p_submarine.sunk? == true ||
-      @com_cruiser.sunk? == true && @com_submarine.sunk? == true
+      @com_cruiser.sunk? == true && @com_submarine.sunk? == true    
+      #until coordinate.fired_upon == false
       coordinate = @player_board.cells.to_a.sample
       if 
       coordinate.last.fire_upon
       computer_feedback(coordinate)
       puts "==============PLAYER BOARD==============\n"
-      print @player_board.render(true)
-      
+      print @player_board.render(true)     
       puts "Enter the coordinate for your shot:\n"
+      #stores a nil coordinate for player that will change to the coordinate they choose
       coordinate = nil
+      #until the player enters a valid coordinate, it will print that the coordinate is invalid
       until @computer_board.valid_coordinate?(coordinate)
         ans = gets.chomp
         coordinate = ans.upcase
         if @computer_board.valid_coordinate?(coordinate) == false
-          p  "Invalid coordinate, try again."
+          p  "Invalid coordinate, try again."     
         end
-        #@computer_board.cells[coordinate].fired_upon? == false
+      end
+  
+      #@computer_board.cells[coordinate].fired_upon? == false
       @computer_board.cells[coordinate].fire_upon
       player_feedback(coordinate)
-        
-        
-        puts  "=============COMPUTER BOARD=============\n"
-        print @computer_board.render(true)
-      end
+      
+      
+      puts  "=============COMPUTER BOARD=============\n"
+      print @computer_board.render(true)
+      # require 'pry'; binding.pry
     end
     end_game
   end
 
-
   def end_game
     if @p_cruiser.sunk? == true && @p_submarine.sunk? == true 
-    puts "I WON!"
-    main_menu
+      puts "I WON!"
     elsif @com_cruiser.sunk? == true && @com_submarine.sunk? == true
-    puts "YOU WON!"
+      puts "YOU WON!"
     end
+    initialize
   end
-
 
 end
 
