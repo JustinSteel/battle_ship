@@ -103,25 +103,37 @@ class Game
     turn       
   end
   
+  def computer_feedback(coordinate)
+    if coordinate.last.ship == nil
+      puts "My shot on #{coordinate.first} was a miss!"
+    elsif coordinate.last.ship == @p_submarine && @p_submarine.sunk? == true
+      puts "I sunk your sub!"
+    elsif coordinate.last.ship == @p_cruiser && @p_cruiser.sunk? == true
+      puts "I sunk your cruiser!"
+    elsif coordinate.last.ship != nil
+      puts "My shot on #{coordinate.first} was a hit!"
+    end
+  end
+
+  def player_feedback(coordinate)
+    if @computer_board.cells[coordinate].ship == nil
+      puts "Your shot on #{coordinate} was a miss!"
+    elsif @computer_board.cells[coordinate].ship == @com_submarine && @com_submarine.sunk? == true
+      puts "You sunk my sub!"
+    elsif @computer_board.cells[coordinate].ship == @com_cruiser && @com_cruiser.sunk? == true
+      puts "You sunk my cruiser!"
+    elsif @computer_board.cells[coordinate].ship != nil
+      puts "Your shot on #{coordinate} was a hit!"
+    end
+  end
+
   def turn
-    # require 'pry'; binding.pry
+  
     until @p_cruiser.sunk? == true && @p_submarine.sunk? == true ||
       @com_cruiser.sunk? == true && @com_submarine.sunk? == true
-      
-      #need to call sunk differently
-      #until coordinate.fired_upon == false
       coordinate = @player_board.cells.to_a.sample
       coordinate.last.fire_upon
-      if coordinate.last.ship == nil
-        puts "My shot on #{coordinate.first} was a miss!"
-      elsif coordinate.last.ship == @p_submarine && @p_submarine.sunk? == true
-        puts "I sunk your sub!"
-      elsif coordinate.last.ship == @p_cruiser && @p_cruiser.sunk? == true
-        puts "I sunk your cruiser!"
-      elsif coordinate.last.ship != nil
-        puts "My shot on #{coordinate.first} was a hit!"
-      end
-      # puts "My shot on #{coordinate} was a #{shot_feedback(coordinate)}!"
+      computer_feedback(coordinate)
       puts "==============PLAYER BOARD==============\n"
       print @player_board.render(true)
       
@@ -131,27 +143,15 @@ class Game
         ans = gets.chomp
         coordinate = ans.upcase
         if @computer_board.valid_coordinate?(coordinate) == false
-          p  "Invalid coordinate, try again."     
-          #display results of hits and misses every turn
+          p  "Invalid coordinate, try again."
         end
-        #require 'pry'; binding.pry
         #@computer_board.cells[coordinate].fired_upon? == false
-          @computer_board.cells[coordinate].fire_upon
-        # puts "Your shot on #{coordinate} was a #{shot_feedback(coordinate)}!"
-
-        if @computer_board.cells[coordinate].ship == nil
-          puts "Your shot on #{coordinate} was a miss!"
-        elsif @computer_board.cells[coordinate].ship == @com_submarine && @com_submarine.sunk? == true
-          puts "You sunk my sub!"
-        elsif @computer_board.cells[coordinate].ship == @com_cruiser && @com_cruiser.sunk? == true
-          puts "You sunk my cruiser!"
-        elsif @computer_board.cells[coordinate].ship != nil
-          puts "Your shot on #{coordinate} was a hit!"
-        end
+      @computer_board.cells[coordinate].fire_upon
+      player_feedback(coordinate)
+        
         
         puts  "=============COMPUTER BOARD=============\n"
         print @computer_board.render(true)
-        # require 'pry'; binding.pry
       end
     end
     end_game
@@ -164,19 +164,9 @@ class Game
     main_menu
     elsif @com_cruiser.sunk? == true && @com_submarine.sunk? == true
     puts "YOU WON!"
-    clear_board
-    main_menu
     end
   end
 
-  def clear_board
-    @player_board = Board.new
-    @computer_board = Board.new
-    @com_cruiser = Ship.new("Cruiser", 3)    
-    @com_submarine = Ship.new("Submarine", 2)
-    @p_cruiser = Ship.new("Cruiser", 3)    
-    @p_submarine = Ship.new("Submarine", 2)
-  end
 
 end
 

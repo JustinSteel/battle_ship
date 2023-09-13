@@ -27,10 +27,7 @@ class Cell
   def fire_upon
     @fired_upon = true
      if empty? == false 
-      ship.hit
-    #  else
-    #   empty? == true
-    #   return "M" 
+      ship.hit 
      end
   end
 
