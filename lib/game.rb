@@ -13,7 +13,10 @@ class Game
     main_menu
   end
 
-  def main_menu
+  def main_menu"
+    
+    "
+
     puts "\n Welcome to BATTLESHIP \n\n"
     puts "Enter p to play. Enter q to quit. <p/q>:"
     ans = gets.chomp
@@ -26,7 +29,7 @@ class Game
     computer_place_ships(@com_submarine)
     computer_place_ships(@com_cruiser)
     computer_board_output
-    puts "\nI have laid out my ships on the grid."
+    puts "\nI put my ships on my board! Hurry up!\n"
     puts "You now need to lay out your two ships."
     puts "The Cruiser is three units long and the Submarine is two units long.\n\n"
     player_board_output
@@ -77,7 +80,7 @@ class Game
       cords = ans.upcase.split(" ")
       if @player_board.valid_placement?(@p_cruiser, cords) == false
         cords = []
-        p  "Invalid placement, try again."
+        p  "Did you really think that would work... try again."
       end
     end
     @player_board.place(@p_cruiser, cords)
@@ -93,7 +96,7 @@ class Game
       cords = ans.upcase.split(" ")
       if @player_board.valid_placement?(@p_submarine, cords) == false
         cords = []
-        p  "Invalid placement, try again."
+        p  "Did you really think that would work... try again."
       end
     end
     @player_board.place(@p_submarine, cords)
@@ -105,9 +108,9 @@ class Game
     if coordinate.last.ship == nil
       puts "My shot on #{coordinate.first} was a miss!"
     elsif coordinate.last.ship == @p_submarine && @p_submarine.sunk? == true
-      puts "I sunk your sub!"
+      puts "OOPS I sank your sub.. HA!"
     elsif coordinate.last.ship == @p_cruiser && @p_cruiser.sunk? == true
-      puts "I sunk your cruiser!"
+      puts "OOPS I sank your cruiser.. HA!"
     elsif coordinate.last.ship != nil
       puts "My shot on #{coordinate.first} was a hit!"
     end
@@ -117,9 +120,9 @@ class Game
     if @computer_board.cells[coordinate].ship == nil
       puts "Your shot on #{coordinate} was a miss!"
     elsif @computer_board.cells[coordinate].ship == @com_submarine && @com_submarine.sunk? == true
-      puts "You sunk my sub!"
+      puts "NOOO! You sunk my sub!"
     elsif @computer_board.cells[coordinate].ship == @com_cruiser && @com_cruiser.sunk? == true
-      puts "You sunk my cruiser!"
+      puts "NOOO! You sunk my cruiser!"
     elsif @computer_board.cells[coordinate].ship != nil
       puts "Your shot on #{coordinate} was a hit!"
     end
@@ -145,7 +148,7 @@ class Game
       ans = gets.chomp
       coordinate = ans.upcase
       if @computer_board.valid_coordinate?(coordinate) == false
-        p  "Invalid coordinate, try again."     
+        p  "Did you really think that would work... try again."     
       end
     end
     @computer_board.cells[coordinate].fire_upon
@@ -164,9 +167,9 @@ class Game
 
   def end_game
     if @p_cruiser.sunk? == true && @p_submarine.sunk? == true 
-      puts "I WON!"
+      puts "HAHAHA! I WON!"
     elsif @com_cruiser.sunk? == true && @com_submarine.sunk? == true
-      puts "YOU WON!"
+      puts "Don't get cocky but YOU WON!"
     end
     initialize
   end
