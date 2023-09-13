@@ -13,8 +13,15 @@ class Game
     main_menu
   end
 
-  def main_menu"
-    
+  def main_menu
+    puts "
+    :::::::::      ::: ::::::::::: ::::::::::: :::        ::::::::::       ::::::::  :::    ::: ::::::::::: :::::::::  
+    :+:    :+:   :+: :+:   :+:         :+:     :+:        :+:             :+:    :+: :+:    :+:     :+:     :+:    :+: 
+    +:+    +:+  +:+   +:+  +:+         +:+     +:+        +:+             +:+        +:+    +:+     +:+     +:+    +:+ 
+    +#++:++#+  +#++:++#++: +#+         +#+     +#+        +#++:++#        +#++:++#++ +#++:++#++     +#+     +#++:++#+  
+    +#+    +#+ +#+     +#+ +#+         +#+     +#+        +#+                    +#+ +#+    +#+     +#+     +#+        
+    #+#    #+# #+#     #+# #+#         #+#     #+#        #+#             #+#    #+# #+#    #+#     #+#     #+#        
+    #########  ###     ### ###         ###     ########## ##########       ########  ###    ### ########### ###        
     "
 
     puts "\n Welcome to BATTLESHIP \n\n"
@@ -29,8 +36,8 @@ class Game
     computer_place_ships(@com_submarine)
     computer_place_ships(@com_cruiser)
     computer_board_output
-    puts "\nI put my ships on my board! Hurry up!\n"
-    puts "You now need to lay out your two ships."
+    puts "\nI put my ships on my board. Waiting on you...\n"
+    puts "Put your 2 ships down!"
     puts "The Cruiser is three units long and the Submarine is two units long.\n\n"
     player_board_output
     cruiser_chooser
@@ -108,9 +115,9 @@ class Game
     if coordinate.last.ship == nil
       puts "My shot on #{coordinate.first} was a miss!"
     elsif coordinate.last.ship == @p_submarine && @p_submarine.sunk? == true
-      puts "OOPS I sank your sub.. HA!"
+      puts "OOPS! I sank your sub."
     elsif coordinate.last.ship == @p_cruiser && @p_cruiser.sunk? == true
-      puts "OOPS I sank your cruiser.. HA!"
+      puts "OOPS! I sank your cruiser."
     elsif coordinate.last.ship != nil
       puts "My shot on #{coordinate.first} was a hit!"
     end
@@ -167,7 +174,7 @@ class Game
 
   def end_game
     if @p_cruiser.sunk? == true && @p_submarine.sunk? == true 
-      puts "HAHAHA! I WON!"
+      puts "We both saw this coming. I WON!"
     elsif @com_cruiser.sunk? == true && @com_submarine.sunk? == true
       puts "Don't get cocky but YOU WON!"
     end
