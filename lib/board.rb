@@ -28,7 +28,7 @@ class Board
 
   def valid_placement?(ship, coordinates)
     if ship.length == coordinates.length
-       check_coordinates(coordinates)
+      check_coordinates(coordinates)
     else
       false
     end
@@ -50,7 +50,7 @@ class Board
     if valid_placement?(ship, cords) == true      
       cords.map do |cord|
         @cells[cord].place_ship(ship)
-       end
+      end
     else
       false
     end

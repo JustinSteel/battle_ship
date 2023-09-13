@@ -29,6 +29,8 @@ class Game
     ans = gets.chomp
     if ans == "p"
       start
+    elsif ans == "q"
+      exit!
     end
   end
 
@@ -180,9 +182,4 @@ class Game
     end
     initialize
   end
-
 end
-
-
-
-#need to only allow shot once per cell

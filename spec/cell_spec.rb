@@ -3,7 +3,6 @@ require './lib/ship'
 
 RSpec.describe Cell do
   describe '#cell' do
-
     before(:each) do
       @cell = Cell.new("B4")
     end
@@ -52,24 +51,15 @@ RSpec.describe Cell do
 
     it "changes string when ship is hit" do
       @cell_2.place_ship(@cruiser)
-
       expect(@cell_2.render).to eq(".")
       expect(@cell_2.render(true)).to eq("S")
-
       @cell_2.fire_upon
-
       expect(@cell_2.render).to eq("H")
       expect(@cruiser.sunk?).to be(false)
-
       @cruiser.hit
       @cruiser.hit
-
       expect(@cruiser.sunk?).to be(true)
-
       expect(@cell_2.render).to eq("X")
     end
-
-
-
   end
 end

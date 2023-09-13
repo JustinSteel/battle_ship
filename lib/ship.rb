@@ -24,5 +24,4 @@ class Ship
     @health -= 1
     sunk?
   end
-
 end
