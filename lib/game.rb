@@ -29,6 +29,8 @@ class Game
     ans = gets.chomp
     if ans == "p"
       start
+    elsif ans == "q"
+      exit!
     end
   end
 

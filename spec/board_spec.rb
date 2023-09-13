@@ -57,7 +57,6 @@ RSpec.describe Board do
     before(:each) do
       @board = Board.new
       @cruiser = Ship.new("Cruiser", 3)
-      # require 'pry'; binding.pry
     end
 
     it 'places ship' do 
@@ -65,7 +64,6 @@ RSpec.describe Board do
       cell_1 = @board.cells["A1"] 
       cell_2 = @board.cells["A2"]
       cell_3 = @board.cells["A3"]
-
       expect(cell_1.ship).to eq(@cruiser)
       expect(cell_2.ship).to eq(@cruiser)
       expect(cell_3.ship).to eq(@cruiser)
@@ -75,7 +73,6 @@ RSpec.describe Board do
     it 'will not overlap ships' do
       @board.place(@cruiser, ["A1", "A2", "A3"])
       @submarine = Ship.new("Submarine", 2) 
-
       expect(@board.valid_placement?(@submarine, ["A1", "B1"])).to be false
     end
   end
@@ -88,7 +85,6 @@ RSpec.describe Board do
     end
 
     it 'renders board' do
-      #require 'pry'; binding.pry
       expect(@board.render).to eq(
       "  1 2 3 4 \n" +
       "A . . . . \n" +
@@ -99,7 +95,6 @@ RSpec.describe Board do
     end
 
     it 'renders board with ships unhidden' do
-      #require 'pry'; binding.pry
       expect(@board.render(true)).to eq(
       "  1 2 3 4 \n" +
       "A S S S . \n" +
