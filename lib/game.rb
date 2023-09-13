@@ -132,6 +132,7 @@ class Game
     until @p_cruiser.sunk? == true && @p_submarine.sunk? == true ||
       @com_cruiser.sunk? == true && @com_submarine.sunk? == true
       coordinate = @player_board.cells.to_a.sample
+      if 
       coordinate.last.fire_upon
       computer_feedback(coordinate)
       puts "==============PLAYER BOARD==============\n"
