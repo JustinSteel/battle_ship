@@ -109,9 +109,19 @@ class Game
       @com_cruiser.sunk? == true && @com_submarine.sunk? == true
       
       #need to call sunk differently
+      #until coordinate.fired_upon == false
       coordinate = @player_board.cells.to_a.sample
       coordinate.last.fire_upon
-      puts "My shot on #{coordinate.first} was a #{shot_feedback(coordinate)}!"
+      if coordinate.last.ship == nil
+        puts "My shot on #{coordinate.first} was a miss!"
+      elsif coordinate.last.ship == @p_submarine && @p_submarine.sunk? == true
+        puts "I sunk your sub!"
+      elsif coordinate.last.ship == @p_cruiser && @p_cruiser.sunk? == true
+        puts "I sunk your cruiser!"
+      elsif coordinate.last.ship != nil
+        puts "My shot on #{coordinate.first} was a hit!"
+      end
+      # puts "My shot on #{coordinate} was a #{shot_feedback(coordinate)}!"
       puts "==============PLAYER BOARD==============\n"
       print @player_board.render(true)
       
@@ -124,8 +134,20 @@ class Game
           p  "Invalid coordinate, try again."     
           #display results of hits and misses every turn
         end
-        @computer_board.cells[coordinate.last].fire_upon
-        puts "Your shot on #{coordinate.first} was a #{shot_feedback(coordinate)}!"
+        #require 'pry'; binding.pry
+        #@computer_board.cells[coordinate].fired_upon? == false
+          @computer_board.cells[coordinate].fire_upon
+        # puts "Your shot on #{coordinate} was a #{shot_feedback(coordinate)}!"
+
+        if @computer_board.cells[coordinate].ship == nil
+          puts "Your shot on #{coordinate} was a miss!"
+        elsif @computer_board.cells[coordinate].ship == @com_submarine && @com_submarine.sunk? == true
+          puts "You sunk my sub!"
+        elsif @computer_board.cells[coordinate].ship == @com_cruiser && @com_cruiser.sunk? == true
+          puts "You sunk my cruiser!"
+        elsif @computer_board.cells[coordinate].ship != nil
+          puts "Your shot on #{coordinate} was a hit!"
+        end
         
         puts  "=============COMPUTER BOARD=============\n"
         print @computer_board.render(true)
@@ -146,13 +168,19 @@ class Game
     end
   end
 
-  def shot_feedback(coordinate)
-    if coordinate.last.fired_upon? == true && coordinate.empty? == true
-      return "close ish"
-    elsif coordinate.last.fired_upon? == true && coordinate.empty? == false && coordinate.last.ship.sunk? == true
-      return "You sunk me"
-    elsif coordinate.last.fired_upon? == true && coordinate.empty? == false
-       "Nice shot"
-    end
-  end
+  # def shot_feedback(coordinate)
+  #   #require 'pry'; binding.pry
+  #   if coordinate.empty? == true
+  #     puts "close ish"
+  #   elsif coordinate.empty? == false
+  #     puts "Nice shot"
+  #   elsif coordinate.last.ship.health == 0
+  #     puts "You sunk me"
+  #   end
+  # end
 end
+
+
+
+#need to clear the board!
+#need to only allow shot once per cell
