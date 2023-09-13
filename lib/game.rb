@@ -65,7 +65,6 @@ class Game
           cords << [split_cord[0], number].join
         end
       end
-    
     end
   end
 
@@ -105,34 +104,55 @@ class Game
   end
   
   def turn
-    #require 'pry'; binding.pry
-    # until @player_board.cruiser.sunk = true && @player_board.submarine.sunk = true ||
-    #   @computer_board.cruiser.sunk = true && @computer_board.submarine.sunk = true
+    # require 'pry'; binding.pry
+    until @p_cruiser.sunk? == true && @p_submarine.sunk? == true ||
+      @com_cruiser.sunk? == true && @com_submarine.sunk? == true
       
       #need to call sunk differently
-    fired_upon_cell = @player_board.cells.to_a.sample
-    puts "My turn. I fire upon #{fired_upon_cell.first}"
-    fired_upon_cell.last.fire_upon
-    puts "==============PLAYER BOARD==============\n"
-    print @player_board.render(true)
-    
-    puts "Enter the coordinate for your shot:\n"
-    coordinate = nil
-    until @computer_board.valid_coordinate?(coordinate)
-      ans = gets.chomp
-      coordinate = ans.upcase
-      if @computer_board.valid_coordinate?(coordinate) == false
-        p  "Invalid coordinate, try again."     
+      coordinate = @player_board.cells.to_a.sample
+      coordinate.last.fire_upon
+      puts "My shot on #{coordinate.first} was a #{shot_feedback(coordinate)}!"
+      puts "==============PLAYER BOARD==============\n"
+      print @player_board.render(true)
+      
+      puts "Enter the coordinate for your shot:\n"
+      coordinate = nil
+      until @computer_board.valid_coordinate?(coordinate)
+        ans = gets.chomp
+        coordinate = ans.upcase
+        if @computer_board.valid_coordinate?(coordinate) == false
+          p  "Invalid coordinate, try again."     
+          #display results of hits and misses every turn
+        end
+        @computer_board.cells[coordinate.last].fire_upon
+        puts "Your shot on #{coordinate.first} was a #{shot_feedback(coordinate)}!"
+        
+        puts  "=============COMPUTER BOARD=============\n"
+        print @computer_board.render(true)
+        # require 'pry'; binding.pry
       end
-      #require 'pry'; binding.pry
-      @computer_board.cells[coordinate].fire_upon
-      puts  "=============COMPUTER BOARD=============\n"
-      print @computer_board.render(true)
-      require 'pry'; binding.pry
+    end
+    end_game
+  end
+
+
+  def end_game
+    if @p_cruiser.sunk? == true && @p_submarine.sunk? == true 
+    puts "I WON!"
+    main_menu
+    elsif @com_cruiser.sunk? == true && @com_submarine.sunk? == true
+    puts "YOU WON!"
+    main_menu
     end
   end
-  
-  #display results of hits and misses every turn
 
-
+  def shot_feedback(coordinate)
+    if coordinate.last.fired_upon? == true && coordinate.empty? == true
+      return "close ish"
+    elsif coordinate.last.fired_upon? == true && coordinate.empty? == false && coordinate.last.ship.sunk? == true
+      return "You sunk me"
+    elsif coordinate.last.fired_upon? == true && coordinate.empty? == false
+       "Nice shot"
+    end
+  end
 end
