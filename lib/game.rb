@@ -111,7 +111,7 @@ class Game
       #need to call sunk differently
       coordinate = @player_board.cells.to_a.sample
       coordinate.last.fire_upon
-      puts "My shot on #{coordinate} was a #{shot_feedback}!"
+      puts "My shot on #{coordinate.first} was a #{shot_feedback(coordinate)}!"
       puts "==============PLAYER BOARD==============\n"
       print @player_board.render(true)
       
@@ -124,8 +124,8 @@ class Game
           p  "Invalid coordinate, try again."     
           #display results of hits and misses every turn
         end
-        @computer_board.cells[coordinate].fire_upon
-        puts "Your shot on #{coordinate} was a #{shot_feedback}!"
+        @computer_board.cells[coordinate.last].fire_upon
+        puts "Your shot on #{coordinate.first} was a #{shot_feedback(coordinate)}!"
         
         puts  "=============COMPUTER BOARD=============\n"
         print @computer_board.render(true)
@@ -146,13 +146,13 @@ class Game
     end
   end
 
-  def shot_feedback
-    if @computer_board.fired_upon == true && cell.fired_upon == true
-      puts "close ish"
-    elsif cell.fired_upon == true && cell.fired_upon == false && @ship.health == 0
-      puts "You sunk me"
-    elsif cell.fired_upon == true && cell.fired_upon == false
-      puts "Nice shot"
+  def shot_feedback(coordinate)
+    if coordinate.last.fired_upon? == true && coordinate.empty? == true
+      return "close ish"
+    elsif coordinate.last.fired_upon? == true && coordinate.empty? == false && coordinate.last.ship.sunk? == true
+      return "You sunk me"
+    elsif coordinate.last.fired_upon? == true && coordinate.empty? == false
+       "Nice shot"
     end
   end
 end
