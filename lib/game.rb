@@ -185,4 +185,4 @@ end
 
 
 
-#need to only allow shot once per cell
+
