@@ -164,23 +164,22 @@ class Game
     main_menu
     elsif @com_cruiser.sunk? == true && @com_submarine.sunk? == true
     puts "YOU WON!"
+    clear_board
     main_menu
     end
   end
 
-  # def shot_feedback(coordinate)
-  #   #require 'pry'; binding.pry
-  #   if coordinate.empty? == true
-  #     puts "close ish"
-  #   elsif coordinate.empty? == false
-  #     puts "Nice shot"
-  #   elsif coordinate.last.ship.health == 0
-  #     puts "You sunk me"
-  #   end
-  # end
+  def clear_board
+    @player_board = Board.new
+    @computer_board = Board.new
+    @com_cruiser = Ship.new("Cruiser", 3)    
+    @com_submarine = Ship.new("Submarine", 2)
+    @p_cruiser = Ship.new("Cruiser", 3)    
+    @p_submarine = Ship.new("Submarine", 2)
+  end
+
 end
 
 
 
-#need to clear the board!
 #need to only allow shot once per cell
