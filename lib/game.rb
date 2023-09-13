@@ -180,9 +180,4 @@ class Game
     end
     initialize
   end
-
 end
-
-
-
-
