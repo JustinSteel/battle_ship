@@ -27,7 +27,7 @@ class Board
   end
 
   def valid_coordinate?(coordinate)
-    @cells.include?(coordinate)
+    @cells.include?(coordinate) && cells[coordinate].fired_upon? == false
   end
 
   def valid_placement?(ship, coordinates)
