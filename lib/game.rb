@@ -126,15 +126,10 @@ class Game
   def turn
     until @p_cruiser.sunk? == true && @p_submarine.sunk? == true ||
       @com_cruiser.sunk? == true && @com_submarine.sunk? == true 
-         coordinate = nil
-
-      # while @player_board.valid_coordinate?(coordinate) == false
-        coordinate = @player_board.cells.to_a.shuffle.pop
-
-      #   if @player_board.valid_coordinate?(coordinate)
-      #   end
-      #   break
-      # end
+      coordinate = @player_board.cells.to_a.sample        
+      until coordinate.last.fired_upon? == false  
+        coordinate = @player_board.cells.to_a.sample
+      end
       coordinate.last.fire_upon
       computer_feedback(coordinate)
       puts "==============PLAYER BOARD==============\n"
