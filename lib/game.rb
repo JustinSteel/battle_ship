@@ -127,15 +127,16 @@ class Game
     until @p_cruiser.sunk? == true && @p_submarine.sunk? == true ||
       @com_cruiser.sunk? == true && @com_submarine.sunk? == true 
          coordinate = nil
-         
-      until @player_board.valid_coordinate?(coordinate)
-        coordinate = @player_board.cells.to_a.sample
 
-        if @player_board.valid_coordinate?(coordinate)
-          coordinate.last.fire_upon
-          computer_feedback(coordinate)
-        end
-      end
+      # while @player_board.valid_coordinate?(coordinate) == false
+        coordinate = @player_board.cells.to_a.shuffle.pop
+
+      #   if @player_board.valid_coordinate?(coordinate)
+      #   end
+      #   break
+      # end
+      coordinate.last.fire_upon
+      computer_feedback(coordinate)
       puts "==============PLAYER BOARD==============\n"
       print @player_board.render(true)     
       puts "Enter the coordinate for your shot:\n"
