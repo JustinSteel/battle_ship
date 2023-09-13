@@ -22,23 +22,19 @@ class Board
     }
   end
 
-  def render(ship = false)
-    
-  end
-
   def valid_coordinate?(coordinate)
     @cells.include?(coordinate) && cells[coordinate].fired_upon? == false
   end
 
   def valid_placement?(ship, coordinates)
     if ship.length == coordinates.length
-       helper_method(coordinates)
+       check_coordinates(coordinates)
     else
       false
     end
   end
 
-  def helper_method(cords)
+  def check_coordinates(cords)
     if cords.all? {|cord| valid_coordinate?(cord)}
       letters = cords.map {|cord| cord[0]}
       numbers = cords.map {|cord| cord[1..-1].to_i}
@@ -61,10 +57,10 @@ class Board
   end
 
   def render(ship = false)
-    r = @cells.values.map do |cell|
-      
+    r = @cells.values.map do |cell|     
       cell.render(ship)
     end
+    
     "  1 2 3 4 \nA " + 
     r[0]  + " " + 
     r[1]  + " " + 

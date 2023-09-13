@@ -3,7 +3,6 @@ require './lib/ship'
 require './lib/cell'
 
 class Game
-
   def initialize
     @player_board = Board.new
     @computer_board = Board.new
@@ -20,8 +19,6 @@ class Game
     ans = gets.chomp
     if ans == "p"
       start
-    elsif ans == "q"
-      "goodbye"
     end
   end
 
@@ -29,10 +26,12 @@ class Game
     computer_place_ships(@com_submarine)
     computer_place_ships(@com_cruiser)
     computer_board_output
-    puts "\nI have laid out my ships on the grid.\nYou now need to lay out your two ships.\nThe Cruiser is three units long and the Submarine is two units long. \n\n"
-      #computer has placed ships, asks for player's input.
+    puts "\nI have laid out my ships on the grid."
+    puts "You now need to lay out your two ships."
+    puts "The Cruiser is three units long and the Submarine is two units long.\n\n"
     player_board_output
     cruiser_chooser
+    sub_chooser
   end
 
   def computer_place_ships(ship)
@@ -59,8 +58,19 @@ class Game
     end
   end
 
+  def player_board_output
+    puts "==============PLAYER BOARD==============\n"
+    print @player_board.render(true)
+  end
+
+  def computer_board_output
+    puts "=============COMPUTER BOARD=============\n"
+    print @computer_board.render 
+  end
+
   def cruiser_chooser
-    puts "Enter the squares for the Cruiser (3 spaces): example: A1 A2 A3" 
+    puts "Enter the squares for the Cruiser (3 spaces):"
+    puts "Example: A1 A2 A3" 
     cords = []
     until @player_board.place(@p_cruiser, cords)
       ans = gets.chomp
@@ -72,21 +82,11 @@ class Game
     end
     @player_board.place(@p_cruiser, cords)
     player_board_output
-    sub_chooser
   end
   
-  def player_board_output
-    puts "==============PLAYER BOARD==============\n"
-    print @player_board.render(true)
-  end
-
-  def computer_board_output
-    puts "=============COMPUTER BOARD=============\n"
-    print @computer_board.render 
-  end
-
   def sub_chooser
-    puts "Enter the squares for the Submarine (2 spaces): example: A2 A3"
+    puts "Enter the squares for the Submarine (2 spaces):"
+    puts "Example: A2 A3"
     cords = []
     until @player_board.valid_placement?(@p_submarine, cords)
       ans = gets.chomp
@@ -133,6 +133,9 @@ class Game
     coordinate.last.fire_upon
     computer_feedback(coordinate)
     player_board_output
+    if @p_cruiser.sunk? == true && @p_submarine.sunk? == true 
+      end_game
+    end
   end
 
   def player_turn
@@ -167,6 +170,7 @@ class Game
     end
     initialize
   end
+
 end
 
 
